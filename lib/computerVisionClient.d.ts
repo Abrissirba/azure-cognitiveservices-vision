@@ -11,15 +11,15 @@
 import { ServiceClient, ServiceClientOptions, ServiceCallback, HttpOperationResponse, ServiceClientCredentials } from 'ms-rest';
 import * as models from "./models";
 
-export default class ComputerVisionClient extends ServiceClient {
+export default class ComputerVisionAPIClient extends ServiceClient {
   /**
    * @class
-   * Initializes a new instance of the ComputerVisionClient class.
+   * Initializes a new instance of the ComputerVisionAPIClient class.
    * @constructor
    *
    * @param {credentials} credentials - Subscription credentials which uniquely identify client subscription.
    *
-   * @param {string} endpoint - Supported Cognitive Services endpoints
+   * @param {azureRegions} azureRegion - Supported Azure regions for Cognitive Services endpoints. Possible values include: 'westus', 'westeurope', 'southeastasia', 'eastus2', 'westcentralus', 'westus2', 'eastus', 'southcentralus', 'northeurope', 'eastasia', 'australiaeast', 'brazilsouth'
    *
    * @param {object} [options] - The parameter options
    *
@@ -31,11 +31,11 @@ export default class ComputerVisionClient extends ServiceClient {
    * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
    *
    */
-  constructor(credentials: ServiceClientCredentials, endpoint: string, options?: ServiceClientOptions);
+  constructor(credentials: ServiceClientCredentials, azureRegion: string, options?: ServiceClientOptions);
 
   credentials: ServiceClientCredentials;
 
-  endpoint: string;
+  azureRegion: string;
 
 
   /**
@@ -104,7 +104,7 @@ export default class ComputerVisionClient extends ServiceClient {
    * parameter to allow you to choose which features to return.  By default,
    * image categories are returned in the response.
    *
-   * @param {string} url Publicly reachable URL of an image
+   * @param {string} url
    *
    * @param {object} [options] Optional Parameters.
    *
@@ -125,11 +125,11 @@ export default class ComputerVisionClient extends ServiceClient {
    * feature types include:Celebrities - identifies celebrities if detected in
    * the image.
    *
-   * @param {string} [options.language] The desired language for output
-   * generation. If this parameter is not specified, the default value is
-   * &quot;en&quot;.Supported languages:en - English, Default. es - Spanish, ja -
-   * Japanese, pt - Portuguese, zh - Simplified Chinese. Possible values include:
-   * 'en', 'es', 'ja', 'pt', 'zh'
+   * @param {string} [options.language] A string indicating which language to
+   * return. The service will return recognition results in specified language.
+   * If this parameter is not specified, the default value is
+   * &quot;en&quot;.Supported languages:en - English, Default.zh - Simplified
+   * Chinese. Possible values include: 'en', 'zh'
    *
    * @param {object} [options.customHeaders] Headers that will be added to the
    * request
@@ -149,7 +149,7 @@ export default class ComputerVisionClient extends ServiceClient {
    * parameter to allow you to choose which features to return.  By default,
    * image categories are returned in the response.
    *
-   * @param {string} url Publicly reachable URL of an image
+   * @param {string} url
    *
    * @param {object} [options] Optional Parameters.
    *
@@ -170,11 +170,11 @@ export default class ComputerVisionClient extends ServiceClient {
    * feature types include:Celebrities - identifies celebrities if detected in
    * the image.
    *
-   * @param {string} [options.language] The desired language for output
-   * generation. If this parameter is not specified, the default value is
-   * &quot;en&quot;.Supported languages:en - English, Default. es - Spanish, ja -
-   * Japanese, pt - Portuguese, zh - Simplified Chinese. Possible values include:
-   * 'en', 'es', 'ja', 'pt', 'zh'
+   * @param {string} [options.language] A string indicating which language to
+   * return. The service will return recognition results in specified language.
+   * If this parameter is not specified, the default value is
+   * &quot;en&quot;.Supported languages:en - English, Default.zh - Simplified
+   * Chinese. Possible values include: 'en', 'zh'
    *
    * @param {object} [options.customHeaders] Headers that will be added to the
    * request
@@ -221,7 +221,7 @@ export default class ComputerVisionClient extends ServiceClient {
    * @param {number} height Height of the thumbnail. It must be between 1 and
    * 1024. Recommended minimum of 50.
    *
-   * @param {string} url Publicly reachable URL of an image
+   * @param {string} url
    *
    * @param {object} [options] Optional Parameters.
    *
@@ -237,7 +237,7 @@ export default class ComputerVisionClient extends ServiceClient {
    *
    * @reject {Error|ServiceError} - The error object.
    */
-  generateThumbnailWithHttpOperationResponse(width: number, height: number, url: string, options?: { smartCropping? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<stream.Readable>>;
+  generateThumbnailWithHttpOperationResponse(width: number, height: number, url: string, options?: { smartCropping? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<any>>;
 
   /**
    * This operation generates a thumbnail image with the user-specified width and
@@ -254,7 +254,7 @@ export default class ComputerVisionClient extends ServiceClient {
    * @param {number} height Height of the thumbnail. It must be between 1 and
    * 1024. Recommended minimum of 50.
    *
-   * @param {string} url Publicly reachable URL of an image
+   * @param {string} url
    *
    * @param {object} [options] Optional Parameters.
    *
@@ -285,9 +285,9 @@ export default class ComputerVisionClient extends ServiceClient {
    *
    *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
    */
-  generateThumbnail(width: number, height: number, url: string, options?: { smartCropping? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<stream.Readable>;
-  generateThumbnail(width: number, height: number, url: string, callback: ServiceCallback<stream.Readable>): void;
-  generateThumbnail(width: number, height: number, url: string, options: { smartCropping? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<stream.Readable>): void;
+  generateThumbnail(width: number, height: number, url: string, options?: { smartCropping? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<any>;
+  generateThumbnail(width: number, height: number, url: string, callback: ServiceCallback<any>): void;
+  generateThumbnail(width: number, height: number, url: string, options: { smartCropping? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<any>): void;
 
 
   /**
@@ -303,7 +303,7 @@ export default class ComputerVisionClient extends ServiceClient {
    * image orientation and correct it before further processing (e.g. if it's
    * upside-down).
    *
-   * @param {string} url Publicly reachable URL of an image
+   * @param {string} url
    *
    * @param {object} [options] Optional Parameters.
    *
@@ -337,7 +337,7 @@ export default class ComputerVisionClient extends ServiceClient {
    * image orientation and correct it before further processing (e.g. if it's
    * upside-down).
    *
-   * @param {string} url Publicly reachable URL of an image
+   * @param {string} url
    *
    * @param {object} [options] Optional Parameters.
    *
@@ -388,18 +388,12 @@ export default class ComputerVisionClient extends ServiceClient {
    * response will contain an error code and a message to help understand what
    * went wrong.
    *
-   * @param {string} url Publicly reachable URL of an image
+   * @param {string} url
    *
    * @param {object} [options] Optional Parameters.
    *
-   * @param {number} [options.maxCandidates] Maximum number of candidate
+   * @param {string} [options.maxCandidates] Maximum number of candidate
    * descriptions to be returned.  The default is 1.
-   *
-   * @param {string} [options.language] The desired language for output
-   * generation. If this parameter is not specified, the default value is
-   * &quot;en&quot;.Supported languages:en - English, Default. es - Spanish, ja -
-   * Japanese, pt - Portuguese, zh - Simplified Chinese. Possible values include:
-   * 'en', 'es', 'ja', 'pt', 'zh'
    *
    * @param {object} [options.customHeaders] Headers that will be added to the
    * request
@@ -410,7 +404,7 @@ export default class ComputerVisionClient extends ServiceClient {
    *
    * @reject {Error|ServiceError} - The error object.
    */
-  describeImageWithHttpOperationResponse(url: string, options?: { maxCandidates? : number, language? : string, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.ImageDescription>>;
+  describeImageWithHttpOperationResponse(url: string, options?: { maxCandidates? : string, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.ImageDescription>>;
 
   /**
    * This operation generates a description of an image in human readable
@@ -423,18 +417,12 @@ export default class ComputerVisionClient extends ServiceClient {
    * response will contain an error code and a message to help understand what
    * went wrong.
    *
-   * @param {string} url Publicly reachable URL of an image
+   * @param {string} url
    *
    * @param {object} [options] Optional Parameters.
    *
-   * @param {number} [options.maxCandidates] Maximum number of candidate
+   * @param {string} [options.maxCandidates] Maximum number of candidate
    * descriptions to be returned.  The default is 1.
-   *
-   * @param {string} [options.language] The desired language for output
-   * generation. If this parameter is not specified, the default value is
-   * &quot;en&quot;.Supported languages:en - English, Default. es - Spanish, ja -
-   * Japanese, pt - Portuguese, zh - Simplified Chinese. Possible values include:
-   * 'en', 'es', 'ja', 'pt', 'zh'
    *
    * @param {object} [options.customHeaders] Headers that will be added to the
    * request
@@ -461,9 +449,9 @@ export default class ComputerVisionClient extends ServiceClient {
    *
    *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
    */
-  describeImage(url: string, options?: { maxCandidates? : number, language? : string, customHeaders? : { [headerName: string]: string; } }): Promise<models.ImageDescription>;
+  describeImage(url: string, options?: { maxCandidates? : string, customHeaders? : { [headerName: string]: string; } }): Promise<models.ImageDescription>;
   describeImage(url: string, callback: ServiceCallback<models.ImageDescription>): void;
-  describeImage(url: string, options: { maxCandidates? : number, language? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ImageDescription>): void;
+  describeImage(url: string, options: { maxCandidates? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ImageDescription>): void;
 
 
   /**
@@ -472,18 +460,12 @@ export default class ComputerVisionClient extends ServiceClient {
    * on objects, living beings, scenery or actions found in images. Unlike
    * categories, tags are not organized according to a hierarchical
    * classification system, but correspond to image content. Tags may contain
-   * hints to avoid ambiguity or provide context, for example the tag 'cello' may
-   * be accompanied by the hint 'musical instrument'. All tags are in English.
+   * hints to avoid ambiguity or provide context, for example the tag “cello” may
+   * be accompanied by the hint “musical instrument”. All tags are in English.
    *
-   * @param {string} url Publicly reachable URL of an image
+   * @param {string} url
    *
    * @param {object} [options] Optional Parameters.
-   *
-   * @param {string} [options.language] The desired language for output
-   * generation. If this parameter is not specified, the default value is
-   * &quot;en&quot;.Supported languages:en - English, Default. es - Spanish, ja -
-   * Japanese, pt - Portuguese, zh - Simplified Chinese. Possible values include:
-   * 'en', 'es', 'ja', 'pt', 'zh'
    *
    * @param {object} [options.customHeaders] Headers that will be added to the
    * request
@@ -494,7 +476,7 @@ export default class ComputerVisionClient extends ServiceClient {
    *
    * @reject {Error|ServiceError} - The error object.
    */
-  tagImageWithHttpOperationResponse(url: string, options?: { language? : string, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.TagResult>>;
+  tagImageWithHttpOperationResponse(url: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.TagResult>>;
 
   /**
    * This operation generates a list of words, or tags, that are relevant to the
@@ -502,18 +484,12 @@ export default class ComputerVisionClient extends ServiceClient {
    * on objects, living beings, scenery or actions found in images. Unlike
    * categories, tags are not organized according to a hierarchical
    * classification system, but correspond to image content. Tags may contain
-   * hints to avoid ambiguity or provide context, for example the tag 'cello' may
-   * be accompanied by the hint 'musical instrument'. All tags are in English.
+   * hints to avoid ambiguity or provide context, for example the tag “cello” may
+   * be accompanied by the hint “musical instrument”. All tags are in English.
    *
-   * @param {string} url Publicly reachable URL of an image
+   * @param {string} url
    *
    * @param {object} [options] Optional Parameters.
-   *
-   * @param {string} [options.language] The desired language for output
-   * generation. If this parameter is not specified, the default value is
-   * &quot;en&quot;.Supported languages:en - English, Default. es - Spanish, ja -
-   * Japanese, pt - Portuguese, zh - Simplified Chinese. Possible values include:
-   * 'en', 'es', 'ja', 'pt', 'zh'
    *
    * @param {object} [options.customHeaders] Headers that will be added to the
    * request
@@ -540,9 +516,9 @@ export default class ComputerVisionClient extends ServiceClient {
    *
    *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
    */
-  tagImage(url: string, options?: { language? : string, customHeaders? : { [headerName: string]: string; } }): Promise<models.TagResult>;
+  tagImage(url: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.TagResult>;
   tagImage(url: string, callback: ServiceCallback<models.TagResult>): void;
-  tagImage(url: string, options: { language? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.TagResult>): void;
+  tagImage(url: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.TagResult>): void;
 
 
   /**
@@ -555,17 +531,12 @@ export default class ComputerVisionClient extends ServiceClient {
    * If the request failed, the response will contain an error code and a message
    * to help understand what went wrong.
    *
-   * @param {string} model The domain-specific content to recognize.
+   * @param {string} model The domain-specific content to recognize. Possible
+   * values include: 'Celebrities', 'Landmarks'
    *
-   * @param {string} url Publicly reachable URL of an image
+   * @param {string} url
    *
    * @param {object} [options] Optional Parameters.
-   *
-   * @param {string} [options.language] The desired language for output
-   * generation. If this parameter is not specified, the default value is
-   * &quot;en&quot;.Supported languages:en - English, Default. es - Spanish, ja -
-   * Japanese, pt - Portuguese, zh - Simplified Chinese. Possible values include:
-   * 'en', 'es', 'ja', 'pt', 'zh'
    *
    * @param {object} [options.customHeaders] Headers that will be added to the
    * request
@@ -576,7 +547,7 @@ export default class ComputerVisionClient extends ServiceClient {
    *
    * @reject {Error|ServiceError} - The error object.
    */
-  analyzeImageByDomainWithHttpOperationResponse(model: string, url: string, options?: { language? : string, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.DomainModelResults>>;
+  analyzeImageByDomainWithHttpOperationResponse(model: string, url: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.DomainModelResults>>;
 
   /**
    * This operation recognizes content within an image by applying a
@@ -588,17 +559,12 @@ export default class ComputerVisionClient extends ServiceClient {
    * If the request failed, the response will contain an error code and a message
    * to help understand what went wrong.
    *
-   * @param {string} model The domain-specific content to recognize.
+   * @param {string} model The domain-specific content to recognize. Possible
+   * values include: 'Celebrities', 'Landmarks'
    *
-   * @param {string} url Publicly reachable URL of an image
+   * @param {string} url
    *
    * @param {object} [options] Optional Parameters.
-   *
-   * @param {string} [options.language] The desired language for output
-   * generation. If this parameter is not specified, the default value is
-   * &quot;en&quot;.Supported languages:en - English, Default. es - Spanish, ja -
-   * Japanese, pt - Portuguese, zh - Simplified Chinese. Possible values include:
-   * 'en', 'es', 'ja', 'pt', 'zh'
    *
    * @param {object} [options.customHeaders] Headers that will be added to the
    * request
@@ -625,23 +591,24 @@ export default class ComputerVisionClient extends ServiceClient {
    *
    *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
    */
-  analyzeImageByDomain(model: string, url: string, options?: { language? : string, customHeaders? : { [headerName: string]: string; } }): Promise<models.DomainModelResults>;
+  analyzeImageByDomain(model: string, url: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.DomainModelResults>;
   analyzeImageByDomain(model: string, url: string, callback: ServiceCallback<models.DomainModelResults>): void;
-  analyzeImageByDomain(model: string, url: string, options: { language? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.DomainModelResults>): void;
+  analyzeImageByDomain(model: string, url: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.DomainModelResults>): void;
 
 
   /**
    * Recognize Text operation. When you use the Recognize Text interface, the
-   * response contains a field called 'Operation-Location'. The
-   * 'Operation-Location' field contains the URL that you must use for your Get
-   * Recognize Text Operation Result operation.
+   * response contains a field called “Operation-Location”. The
+   * “Operation-Location” field contains the URL that you must use for your Get
+   * Handwritten Text Operation Result operation.
    *
-   * @param {string} mode Type of text to recognize. Possible values include:
-   * 'Handwritten', 'Printed'
-   *
-   * @param {string} url Publicly reachable URL of an image
+   * @param {string} url
    *
    * @param {object} [options] Optional Parameters.
+   *
+   * @param {boolean} [options.detectHandwriting] If “true” is specified,
+   * handwriting recognition is performed. If this parameter is set to “false” or
+   * is not specified, printed text recognition is performed.
    *
    * @param {object} [options.customHeaders] Headers that will be added to the
    * request
@@ -652,20 +619,21 @@ export default class ComputerVisionClient extends ServiceClient {
    *
    * @reject {Error|ServiceError} - The error object.
    */
-  recognizeTextWithHttpOperationResponse(url: string, mode: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+  recognizeTextWithHttpOperationResponse(url: string, options?: { detectHandwriting? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
 
   /**
    * Recognize Text operation. When you use the Recognize Text interface, the
-   * response contains a field called 'Operation-Location'. The
-   * 'Operation-Location' field contains the URL that you must use for your Get
-   * Recognize Text Operation Result operation.
+   * response contains a field called “Operation-Location”. The
+   * “Operation-Location” field contains the URL that you must use for your Get
+   * Handwritten Text Operation Result operation.
    *
-   * @param {string} mode Type of text to recognize. Possible values include:
-   * 'Handwritten', 'Printed'
-   *
-   * @param {string} url Publicly reachable URL of an image
+   * @param {string} url
    *
    * @param {object} [options] Optional Parameters.
+   *
+   * @param {boolean} [options.detectHandwriting] If “true” is specified,
+   * handwriting recognition is performed. If this parameter is set to “false” or
+   * is not specified, printed text recognition is performed.
    *
    * @param {object} [options.customHeaders] Headers that will be added to the
    * request
@@ -691,9 +659,9 @@ export default class ComputerVisionClient extends ServiceClient {
    *
    *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
    */
-  recognizeText(url: string, mode: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<void>;
-  recognizeText(url: string, mode: string, callback: ServiceCallback<void>): void;
-  recognizeText(url: string, mode: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+  recognizeText(url: string, options?: { detectHandwriting? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<void>;
+  recognizeText(url: string, callback: ServiceCallback<void>): void;
+  recognizeText(url: string, options: { detectHandwriting? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
 
 
   /**
@@ -702,7 +670,7 @@ export default class ComputerVisionClient extends ServiceClient {
    * Recognize Text interface.
    *
    * @param {string} operationId Id of the text operation returned in the
-   * response of the 'Recognize Text'
+   * response of the 'Recognize Handwritten Text'
    *
    * @param {object} [options] Optional Parameters.
    *
@@ -723,7 +691,7 @@ export default class ComputerVisionClient extends ServiceClient {
    * Recognize Text interface.
    *
    * @param {string} operationId Id of the text operation returned in the
-   * response of the 'Recognize Text'
+   * response of the 'Recognize Handwritten Text'
    *
    * @param {object} [options] Optional Parameters.
    *
@@ -777,16 +745,16 @@ export default class ComputerVisionClient extends ServiceClient {
    * black&white.Adult - detects if the image is pornographic in nature (depicts
    * nudity or a sex act).  Sexually suggestive content is also detected.
    *
-   * @param {array} [options.details] A string indicating which domain-specific
+   * @param {string} [options.details] A string indicating which domain-specific
    * details to return. Multiple values should be comma-separated. Valid visual
    * feature types include:Celebrities - identifies celebrities if detected in
-   * the image.
+   * the image. Possible values include: 'Celebrities', 'Landmarks'
    *
-   * @param {string} [options.language] The desired language for output
-   * generation. If this parameter is not specified, the default value is
-   * &quot;en&quot;.Supported languages:en - English, Default. es - Spanish, ja -
-   * Japanese, pt - Portuguese, zh - Simplified Chinese. Possible values include:
-   * 'en', 'es', 'ja', 'pt', 'zh'
+   * @param {string} [options.language] A string indicating which language to
+   * return. The service will return recognition results in specified language.
+   * If this parameter is not specified, the default value is
+   * &quot;en&quot;.Supported languages:en - English, Default.zh - Simplified
+   * Chinese. Possible values include: 'en', 'zh'
    *
    * @param {object} [options.customHeaders] Headers that will be added to the
    * request
@@ -797,7 +765,7 @@ export default class ComputerVisionClient extends ServiceClient {
    *
    * @reject {Error|ServiceError} - The error object.
    */
-  analyzeImageInStreamWithHttpOperationResponse(image: stream.Readable, options?: { visualFeatures? : string[], details? : string[], language? : string, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.ImageAnalysis>>;
+  analyzeImageInStreamWithHttpOperationResponse(image: any, options?: { visualFeatures? : string[], details? : string, language? : string, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.ImageAnalysis>>;
 
   /**
    * This operation extracts a rich set of visual features based on the image
@@ -819,16 +787,16 @@ export default class ComputerVisionClient extends ServiceClient {
    * black&white.Adult - detects if the image is pornographic in nature (depicts
    * nudity or a sex act).  Sexually suggestive content is also detected.
    *
-   * @param {array} [options.details] A string indicating which domain-specific
+   * @param {string} [options.details] A string indicating which domain-specific
    * details to return. Multiple values should be comma-separated. Valid visual
    * feature types include:Celebrities - identifies celebrities if detected in
-   * the image.
+   * the image. Possible values include: 'Celebrities', 'Landmarks'
    *
-   * @param {string} [options.language] The desired language for output
-   * generation. If this parameter is not specified, the default value is
-   * &quot;en&quot;.Supported languages:en - English, Default. es - Spanish, ja -
-   * Japanese, pt - Portuguese, zh - Simplified Chinese. Possible values include:
-   * 'en', 'es', 'ja', 'pt', 'zh'
+   * @param {string} [options.language] A string indicating which language to
+   * return. The service will return recognition results in specified language.
+   * If this parameter is not specified, the default value is
+   * &quot;en&quot;.Supported languages:en - English, Default.zh - Simplified
+   * Chinese. Possible values include: 'en', 'zh'
    *
    * @param {object} [options.customHeaders] Headers that will be added to the
    * request
@@ -855,9 +823,9 @@ export default class ComputerVisionClient extends ServiceClient {
    *
    *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
    */
-  analyzeImageInStream(image: stream.Readable, options?: { visualFeatures? : string[], details? : string[], language? : string, customHeaders? : { [headerName: string]: string; } }): Promise<models.ImageAnalysis>;
-  analyzeImageInStream(image: stream.Readable, callback: ServiceCallback<models.ImageAnalysis>): void;
-  analyzeImageInStream(image: stream.Readable, options: { visualFeatures? : string[], details? : string[], language? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ImageAnalysis>): void;
+  analyzeImageInStream(image: any, options?: { visualFeatures? : string[], details? : string, language? : string, customHeaders? : { [headerName: string]: string; } }): Promise<models.ImageAnalysis>;
+  analyzeImageInStream(image: any, callback: ServiceCallback<models.ImageAnalysis>): void;
+  analyzeImageInStream(image: any, options: { visualFeatures? : string[], details? : string, language? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ImageAnalysis>): void;
 
 
   /**
@@ -891,7 +859,7 @@ export default class ComputerVisionClient extends ServiceClient {
    *
    * @reject {Error|ServiceError} - The error object.
    */
-  generateThumbnailInStreamWithHttpOperationResponse(width: number, height: number, image: stream.Readable, options?: { smartCropping? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<stream.Readable>>;
+  generateThumbnailInStreamWithHttpOperationResponse(width: number, height: number, image: any, options?: { smartCropping? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<any>>;
 
   /**
    * This operation generates a thumbnail image with the user-specified width and
@@ -939,9 +907,9 @@ export default class ComputerVisionClient extends ServiceClient {
    *
    *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
    */
-  generateThumbnailInStream(width: number, height: number, image: stream.Readable, options?: { smartCropping? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<stream.Readable>;
-  generateThumbnailInStream(width: number, height: number, image: stream.Readable, callback: ServiceCallback<stream.Readable>): void;
-  generateThumbnailInStream(width: number, height: number, image: stream.Readable, options: { smartCropping? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<stream.Readable>): void;
+  generateThumbnailInStream(width: number, height: number, image: any, options?: { smartCropping? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<any>;
+  generateThumbnailInStream(width: number, height: number, image: any, callback: ServiceCallback<any>): void;
+  generateThumbnailInStream(width: number, height: number, image: any, options: { smartCropping? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<any>): void;
 
 
   /**
@@ -976,7 +944,7 @@ export default class ComputerVisionClient extends ServiceClient {
    *
    * @reject {Error|ServiceError} - The error object.
    */
-  recognizePrintedTextInStreamWithHttpOperationResponse(detectOrientation: boolean, image: stream.Readable, options?: { language? : string, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.OcrResult>>;
+  recognizePrintedTextInStreamWithHttpOperationResponse(detectOrientation: boolean, image: any, options?: { language? : string, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.OcrResult>>;
 
   /**
    * Optical Character Recognition (OCR) detects printed text in an image and
@@ -1026,9 +994,9 @@ export default class ComputerVisionClient extends ServiceClient {
    *
    *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
    */
-  recognizePrintedTextInStream(detectOrientation: boolean, image: stream.Readable, options?: { language? : string, customHeaders? : { [headerName: string]: string; } }): Promise<models.OcrResult>;
-  recognizePrintedTextInStream(detectOrientation: boolean, image: stream.Readable, callback: ServiceCallback<models.OcrResult>): void;
-  recognizePrintedTextInStream(detectOrientation: boolean, image: stream.Readable, options: { language? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.OcrResult>): void;
+  recognizePrintedTextInStream(detectOrientation: boolean, image: any, options?: { language? : string, customHeaders? : { [headerName: string]: string; } }): Promise<models.OcrResult>;
+  recognizePrintedTextInStream(detectOrientation: boolean, image: any, callback: ServiceCallback<models.OcrResult>): void;
+  recognizePrintedTextInStream(detectOrientation: boolean, image: any, options: { language? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.OcrResult>): void;
 
 
   /**
@@ -1046,14 +1014,8 @@ export default class ComputerVisionClient extends ServiceClient {
    *
    * @param {object} [options] Optional Parameters.
    *
-   * @param {number} [options.maxCandidates] Maximum number of candidate
+   * @param {string} [options.maxCandidates] Maximum number of candidate
    * descriptions to be returned.  The default is 1.
-   *
-   * @param {string} [options.language] The desired language for output
-   * generation. If this parameter is not specified, the default value is
-   * &quot;en&quot;.Supported languages:en - English, Default. es - Spanish, ja -
-   * Japanese, pt - Portuguese, zh - Simplified Chinese. Possible values include:
-   * 'en', 'es', 'ja', 'pt', 'zh'
    *
    * @param {object} [options.customHeaders] Headers that will be added to the
    * request
@@ -1064,7 +1026,7 @@ export default class ComputerVisionClient extends ServiceClient {
    *
    * @reject {Error|ServiceError} - The error object.
    */
-  describeImageInStreamWithHttpOperationResponse(image: stream.Readable, options?: { maxCandidates? : number, language? : string, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.ImageDescription>>;
+  describeImageInStreamWithHttpOperationResponse(image: any, options?: { maxCandidates? : string, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.ImageDescription>>;
 
   /**
    * This operation generates a description of an image in human readable
@@ -1081,14 +1043,8 @@ export default class ComputerVisionClient extends ServiceClient {
    *
    * @param {object} [options] Optional Parameters.
    *
-   * @param {number} [options.maxCandidates] Maximum number of candidate
+   * @param {string} [options.maxCandidates] Maximum number of candidate
    * descriptions to be returned.  The default is 1.
-   *
-   * @param {string} [options.language] The desired language for output
-   * generation. If this parameter is not specified, the default value is
-   * &quot;en&quot;.Supported languages:en - English, Default. es - Spanish, ja -
-   * Japanese, pt - Portuguese, zh - Simplified Chinese. Possible values include:
-   * 'en', 'es', 'ja', 'pt', 'zh'
    *
    * @param {object} [options.customHeaders] Headers that will be added to the
    * request
@@ -1115,9 +1071,9 @@ export default class ComputerVisionClient extends ServiceClient {
    *
    *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
    */
-  describeImageInStream(image: stream.Readable, options?: { maxCandidates? : number, language? : string, customHeaders? : { [headerName: string]: string; } }): Promise<models.ImageDescription>;
-  describeImageInStream(image: stream.Readable, callback: ServiceCallback<models.ImageDescription>): void;
-  describeImageInStream(image: stream.Readable, options: { maxCandidates? : number, language? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ImageDescription>): void;
+  describeImageInStream(image: any, options?: { maxCandidates? : string, customHeaders? : { [headerName: string]: string; } }): Promise<models.ImageDescription>;
+  describeImageInStream(image: any, callback: ServiceCallback<models.ImageDescription>): void;
+  describeImageInStream(image: any, options: { maxCandidates? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ImageDescription>): void;
 
 
   /**
@@ -1126,18 +1082,12 @@ export default class ComputerVisionClient extends ServiceClient {
    * on objects, living beings, scenery or actions found in images. Unlike
    * categories, tags are not organized according to a hierarchical
    * classification system, but correspond to image content. Tags may contain
-   * hints to avoid ambiguity or provide context, for example the tag 'cello' may
-   * be accompanied by the hint 'musical instrument'. All tags are in English.
+   * hints to avoid ambiguity or provide context, for example the tag “cello” may
+   * be accompanied by the hint “musical instrument”. All tags are in English.
    *
    * @param {object} image An image stream.
    *
    * @param {object} [options] Optional Parameters.
-   *
-   * @param {string} [options.language] The desired language for output
-   * generation. If this parameter is not specified, the default value is
-   * &quot;en&quot;.Supported languages:en - English, Default. es - Spanish, ja -
-   * Japanese, pt - Portuguese, zh - Simplified Chinese. Possible values include:
-   * 'en', 'es', 'ja', 'pt', 'zh'
    *
    * @param {object} [options.customHeaders] Headers that will be added to the
    * request
@@ -1148,7 +1098,7 @@ export default class ComputerVisionClient extends ServiceClient {
    *
    * @reject {Error|ServiceError} - The error object.
    */
-  tagImageInStreamWithHttpOperationResponse(image: stream.Readable, options?: { language? : string, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.TagResult>>;
+  tagImageInStreamWithHttpOperationResponse(image: any, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.TagResult>>;
 
   /**
    * This operation generates a list of words, or tags, that are relevant to the
@@ -1156,18 +1106,12 @@ export default class ComputerVisionClient extends ServiceClient {
    * on objects, living beings, scenery or actions found in images. Unlike
    * categories, tags are not organized according to a hierarchical
    * classification system, but correspond to image content. Tags may contain
-   * hints to avoid ambiguity or provide context, for example the tag 'cello' may
-   * be accompanied by the hint 'musical instrument'. All tags are in English.
+   * hints to avoid ambiguity or provide context, for example the tag “cello” may
+   * be accompanied by the hint “musical instrument”. All tags are in English.
    *
    * @param {object} image An image stream.
    *
    * @param {object} [options] Optional Parameters.
-   *
-   * @param {string} [options.language] The desired language for output
-   * generation. If this parameter is not specified, the default value is
-   * &quot;en&quot;.Supported languages:en - English, Default. es - Spanish, ja -
-   * Japanese, pt - Portuguese, zh - Simplified Chinese. Possible values include:
-   * 'en', 'es', 'ja', 'pt', 'zh'
    *
    * @param {object} [options.customHeaders] Headers that will be added to the
    * request
@@ -1194,9 +1138,9 @@ export default class ComputerVisionClient extends ServiceClient {
    *
    *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
    */
-  tagImageInStream(image: stream.Readable, options?: { language? : string, customHeaders? : { [headerName: string]: string; } }): Promise<models.TagResult>;
-  tagImageInStream(image: stream.Readable, callback: ServiceCallback<models.TagResult>): void;
-  tagImageInStream(image: stream.Readable, options: { language? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.TagResult>): void;
+  tagImageInStream(image: any, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.TagResult>;
+  tagImageInStream(image: any, callback: ServiceCallback<models.TagResult>): void;
+  tagImageInStream(image: any, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.TagResult>): void;
 
 
   /**
@@ -1214,12 +1158,6 @@ export default class ComputerVisionClient extends ServiceClient {
    * @param {object} image An image stream.
    *
    * @param {object} [options] Optional Parameters.
-   *
-   * @param {string} [options.language] The desired language for output
-   * generation. If this parameter is not specified, the default value is
-   * &quot;en&quot;.Supported languages:en - English, Default. es - Spanish, ja -
-   * Japanese, pt - Portuguese, zh - Simplified Chinese. Possible values include:
-   * 'en', 'es', 'ja', 'pt', 'zh'
    *
    * @param {object} [options.customHeaders] Headers that will be added to the
    * request
@@ -1230,7 +1168,7 @@ export default class ComputerVisionClient extends ServiceClient {
    *
    * @reject {Error|ServiceError} - The error object.
    */
-  analyzeImageByDomainInStreamWithHttpOperationResponse(model: string, image: stream.Readable, options?: { language? : string, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.DomainModelResults>>;
+  analyzeImageByDomainInStreamWithHttpOperationResponse(model: string, image: any, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.DomainModelResults>>;
 
   /**
    * This operation recognizes content within an image by applying a
@@ -1247,12 +1185,6 @@ export default class ComputerVisionClient extends ServiceClient {
    * @param {object} image An image stream.
    *
    * @param {object} [options] Optional Parameters.
-   *
-   * @param {string} [options.language] The desired language for output
-   * generation. If this parameter is not specified, the default value is
-   * &quot;en&quot;.Supported languages:en - English, Default. es - Spanish, ja -
-   * Japanese, pt - Portuguese, zh - Simplified Chinese. Possible values include:
-   * 'en', 'es', 'ja', 'pt', 'zh'
    *
    * @param {object} [options.customHeaders] Headers that will be added to the
    * request
@@ -1279,23 +1211,24 @@ export default class ComputerVisionClient extends ServiceClient {
    *
    *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
    */
-  analyzeImageByDomainInStream(model: string, image: stream.Readable, options?: { language? : string, customHeaders? : { [headerName: string]: string; } }): Promise<models.DomainModelResults>;
-  analyzeImageByDomainInStream(model: string, image: stream.Readable, callback: ServiceCallback<models.DomainModelResults>): void;
-  analyzeImageByDomainInStream(model: string, image: stream.Readable, options: { language? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.DomainModelResults>): void;
+  analyzeImageByDomainInStream(model: string, image: any, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.DomainModelResults>;
+  analyzeImageByDomainInStream(model: string, image: any, callback: ServiceCallback<models.DomainModelResults>): void;
+  analyzeImageByDomainInStream(model: string, image: any, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.DomainModelResults>): void;
 
 
   /**
    * Recognize Text operation. When you use the Recognize Text interface, the
-   * response contains a field called 'Operation-Location'. The
-   * 'Operation-Location' field contains the URL that you must use for your Get
-   * Recognize Text Operation Result operation.
+   * response contains a field called “Operation-Location”. The
+   * “Operation-Location” field contains the URL that you must use for your Get
+   * Handwritten Text Operation Result operation.
    *
    * @param {object} image An image stream.
    *
-   * @param {string} mode Type of text to recognize. Possible values include:
-   * 'Handwritten', 'Printed'
-   *
    * @param {object} [options] Optional Parameters.
+   *
+   * @param {boolean} [options.detectHandwriting] If “true” is specified,
+   * handwriting recognition is performed. If this parameter is set to “false” or
+   * is not specified, printed text recognition is performed.
    *
    * @param {object} [options.customHeaders] Headers that will be added to the
    * request
@@ -1306,20 +1239,21 @@ export default class ComputerVisionClient extends ServiceClient {
    *
    * @reject {Error|ServiceError} - The error object.
    */
-  recognizeTextInStreamWithHttpOperationResponse(image: stream.Readable, mode: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+  recognizeTextInStreamWithHttpOperationResponse(image: any, options?: { detectHandwriting? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
 
   /**
    * Recognize Text operation. When you use the Recognize Text interface, the
-   * response contains a field called 'Operation-Location'. The
-   * 'Operation-Location' field contains the URL that you must use for your Get
-   * Recognize Text Operation Result operation.
+   * response contains a field called “Operation-Location”. The
+   * “Operation-Location” field contains the URL that you must use for your Get
+   * Handwritten Text Operation Result operation.
    *
    * @param {object} image An image stream.
    *
-   * @param {string} mode Type of text to recognize. Possible values include:
-   * 'Handwritten', 'Printed'
-   *
    * @param {object} [options] Optional Parameters.
+   *
+   * @param {boolean} [options.detectHandwriting] If “true” is specified,
+   * handwriting recognition is performed. If this parameter is set to “false” or
+   * is not specified, printed text recognition is performed.
    *
    * @param {object} [options.customHeaders] Headers that will be added to the
    * request
@@ -1345,9 +1279,9 @@ export default class ComputerVisionClient extends ServiceClient {
    *
    *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
    */
-  recognizeTextInStream(image: stream.Readable, mode: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<void>;
-  recognizeTextInStream(image: stream.Readable, mode: string, callback: ServiceCallback<void>): void;
-  recognizeTextInStream(image: stream.Readable, mode: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+  recognizeTextInStream(image: any, options?: { detectHandwriting? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<void>;
+  recognizeTextInStream(image: any, callback: ServiceCallback<void>): void;
+  recognizeTextInStream(image: any, options: { detectHandwriting? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
 }
 
-export { ComputerVisionClient, models as ComputerVisionModels };
+export { ComputerVisionAPIClient, models as ComputerVisionAPIModels };
