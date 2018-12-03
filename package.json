@@ -1,24 +1,28 @@
 {
-  "name": "azure-cognitiveservices-computervision",
-  "author": "Microsoft Corporation",
-  "description": "ComputerVisionClient Library with typescript type definitions for node",
-  "version": "3.2.0",
+  "author": {
+    "name": "Microsoft Corporation"
+  },
+  "bugs": {
+    "url": "https://github.com/azure/azure-sdk-for-node/issues"
+  },
+  "bundleDependencies": false,
   "dependencies": {
     "ms-rest": "^2.3.3"
   },
+  "deprecated": false,
+  "description": "ComputerVisionClient Library with typescript type definitions for node",
+  "homepage": "https://github.com/azure/azure-sdk-for-node/tree/master/lib/services/computerVision",
   "keywords": [
     "node",
     "azure"
   ],
   "license": "MIT",
   "main": "./lib/computerVisionClient.js",
-  "types": "./lib/computerVisionClient.d.ts",
-  "homepage": "https://github.com/azure/azure-sdk-for-node/tree/master/lib/services/computerVision",
+  "name": "azure-cognitiveservices-computervision",
   "repository": {
     "type": "git",
-    "url": "https://github.com/azure/azure-sdk-for-node.git"
+    "url": "git+https://github.com/azure/azure-sdk-for-node.git"
   },
-  "bugs": {
-    "url": "https://github.com/azure/azure-sdk-for-node/issues"
-  }
+  "types": "./lib/computerVisionClient.d.ts",
+  "version": "3.2.0"
 }
